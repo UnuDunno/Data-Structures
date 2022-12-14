@@ -165,6 +165,8 @@ ListNode insertEndList(List list, ListElement element) {
         return NULL;
     }
 
+    if(isListEmpty(list)) return pushList(list, element);
+
     LIST *dll = (LIST *) list;
 
     LISTNODE *lnd = newListNode();
@@ -193,13 +195,14 @@ ListElement pop(List list) {
     LISTNODE *head = dll->head;
 
     dll->head = dll->head->next;
+    dll->size--;
+    
+    if(!isListEmpty(list)) dll->head->previous = NULL;
     
     head->next = NULL;
     head->element = NULL;
 
     free(head);
-    
-    dll->size--;
 
     return element;
 }
@@ -220,7 +223,8 @@ ListElement removeListNode(List list, ListNode node) {
     ListElement element = lnd->element;
     
     lnd->previous->next = lnd->next;
-    lnd->next->previous = lnd->previous;
+    if(lnd->next) lnd->next->previous = lnd->previous;
+    else dll->tail = lnd->previous;
 
     lnd->next = NULL;
     lnd->previous = NULL;
@@ -234,7 +238,7 @@ ListElement removeListNode(List list, ListNode node) {
 }
 
 ListElement removeList(List list, int position) {
-    if(!list || position < 0) {
+    if(!list) {
         printf("WARNING: Invalid parameters -- removeList --\n");
         return NULL;
     }
