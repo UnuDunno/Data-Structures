@@ -128,7 +128,7 @@ ListNode insertEndList(List list, ListElement element);
 */
 ListElement pop(List list);
 
-/*#include
+/*
     # Inputs:
         - list: dll
         - node: ListNode from list
