@@ -219,6 +219,19 @@ ListNode getPreviousListNode(List list, ListNode node);
         - list: dll
     
     # Description:
+        - Reverse list
+
+        - List must not be empty
+
+        - Ex: If list = [1, 4, 2, 3] list will be: [3, 2, 4, 1]
+*/
+void reverseList(List list);
+
+/*
+    # Input:
+        - list: dll
+    
+    # Description:
         - Free all the memory used by list
 */
 void destroyList(List list);

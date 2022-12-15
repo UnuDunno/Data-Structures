@@ -311,6 +311,33 @@ ListNode getPreviousListNode(List list, ListNode node) {
     return lnd->previous;
 }
 
+void reverseList(List list) {
+    if(!list) {
+        printf("WARNING: Invalid parameter -- reverseList --\n");
+        return;
+    }
+
+    if(isListEmpty(list)) return;
+
+    LIST *dll = (LIST *) list;
+
+    LISTNODE *currentNode = dll->head;
+    dll->head = dll->tail;
+    dll->tail = currentNode;
+
+    LISTNODE *temp;
+    currentNode = dll->head;
+    while (currentNode) {
+        temp = currentNode->previous;
+
+        currentNode->previous = currentNode->next;
+        currentNode->next = temp;
+
+        currentNode = temp;
+    }
+    
+}
+
 void destroyList(List list) {
     if(!list) return;
 
