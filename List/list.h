@@ -13,7 +13,7 @@
 
     - A valid ListNode has ListElement != NULL
 
-    - All in this module assume List != NULL, ListElement != NULL and ListNode != NULL for functions that recieve
+    - In this module its assumed List != NULL, ListElement != NULL and ListNode != NULL for functions that recieve
       those as parameters 
 
     - It's necessary to free the memory allocated for List and ListNode using the functions provided in this module
