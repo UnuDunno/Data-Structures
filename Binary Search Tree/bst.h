@@ -24,11 +24,20 @@ typedef void *BSTNode;
 typedef void *BSTElement;
 
 /*
-    Returns: -1 if el1 < el2
+    - Function to compare 2 BSTElements
+
+    - Returns: -1 if el1 < el2
              +1 if el1 > el2
              0 if el1 == el2
 */
 typedef int (* CompareElementsBST)(BSTElement el1, BSTElement el2);
+
+/*
+    - Function utilized by the traversal functions
+
+    - If this function returns true, the traversal will stop
+*/
+typedef bool (* VisitBSTNode)(BST bst, BSTNode node, void *extra);
 
 /*
     # Input:
@@ -37,25 +46,26 @@ typedef int (* CompareElementsBST)(BSTElement el1, BSTElement el2);
     # Description:
         - Returns a pointer to a new BST
 */
-BST newTree(CompareElementsBST compare);
+BST newBST(CompareElementsBST compare);
 
 /*
     # Input:
-        - bst: BST
+        - root: Node from a BST
     
     # Description:
-        - Returns true if bst is empty, false otherwise
+        - Returns true if the BST with root as its root node
+          is empty, false otherwise
 */
-bool isBSTEmpty(BST bst);
+bool isBSTEmpty(BSTNode root);
 
 /*
     # Input:
-        - node: Node from a BST
+        - root: Node from a BST
     
     # Description:
-        - Returns the height of the subtree with node as its root
+        - Returns the height of the BST with node as its root
 */
-int getSubBSTHeight(BSTNode node);
+int getBSTHeight(BSTNode root);
 
 /*
     # Input:
@@ -95,44 +105,109 @@ BSTNode getBSTRoot(BST bst);
 
 /*
     # Input:
-        - bst: BST
         - node: BSTNode from bst
     
     # Description:
         - Returns BSTNode that is the root of the left
           subtree pointed by node
 */
-BSTNode getBSTNodeLeftNode(BST bst, BSTNode node);
+BSTNode getBSTNodeLeftNode(BSTNode node);
 
 /*
     # Input:
-        - bst: BST
         - node: BSTNode from bst
     
     # Description:
         - Returns BSTNode that is the root of the right
           subtree pointed by node
 */
-BSTNode getBSTNodeRightNode(BST bst, BSTNode node);
+BSTNode getBSTNodeRightNode(BSTNode node);
 
 /*
     # Input:
-        - bst: BST
         - node: BSTNode from bst
     
     # Description:
         - Returns BSTNode that is the "father" of node
 */
-BSTNode getBSTNodeFatherNode(BST bst, BSTNode node);
+BSTNode getBSTNodeParentNode(BSTNode node);
 
 /*
     # Input:
-        - bst: BST
         - node: BSTNode from bst
     
     # Description:
         - Returns the element stored in node
 */
-BSTElement getBSTNodeElement(BST bst, BSTNode node);
+BSTElement getBSTNodeElement(BSTNode node);
+
+/*
+    # Input:
+        - bst: BST
+        - element: Searched element
+    
+    # Description:
+        - Returns the BSTNode in wich element is stored
+
+        - If element is not in bst, returns NULL
+*/
+BSTNode findBSTNodeElement(BST bst, BSTElement element);
+
+/*
+    # Input:
+        - bst: BST
+        - visit: Function to be used during the traversal
+        - extra: Extra pointer if necessary
+    
+    # Description:
+        - Traverse tree in-order
+
+        - visit and extra can be NULL
+*/
+void inOrderBSTTraversal(BST bst, VisitBSTNode visit, void *extra);
+
+/*
+    # Input:
+        - bst: BST
+        - visit: Function to be used during the traversal
+        - extra: Extra pointer if necessary
+    
+    # Description:
+        - Traverse tree pre-order
+
+        - visit and extra can be NULL
+*/
+void preOrderBSTTraversal(BST bst, VisitBSTNode visit, void *extra);
+
+/*
+    # Input:
+        - bst: BST
+        - visit: Function to be used during the traversal
+        - extra: Extra pointer if necessary
+    
+    # Description:
+        - Traverse tree post-order
+
+        - visit and extra can be NULL
+*/
+void postOrderBSTTraversal(BST bst, VisitBSTNode visit, void *extra);
+
+/*
+    # Input:
+        - bst: BST
+    
+    # Description:
+        - Reverse bst
+*/
+void reverseBST(BST bst);
+
+/*
+    # Input:
+        - bst: BST
+    
+    # Description:
+        - Free all the memory used by bst
+*/
+void destroyBST(BST bst);
 
 #endif
